@@ -23,11 +23,10 @@ public class MovieController {
 
     private final MovieService2 movieService;
 
-//    @GetMapping("/v1/movies")
-//    public Response<List<MovieResponse>> getMovies(){
-//
-//        return Response.of(movieService.getMovies());
-//    }
+    @GetMapping("/v1/movies")
+    public Response<List<MovieResponse>> getMovies(){
+        return Response.of(movieService.getMovies());
+    }
 
     @GetMapping("/v1/movies/{movieId}")
     public MovieResponse getMovie(

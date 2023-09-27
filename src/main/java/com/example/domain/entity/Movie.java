@@ -5,10 +5,12 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="movie")
 @Getter
+@Setter
 @NoArgsConstructor
 public class Movie {
     @Id
@@ -23,6 +25,13 @@ public class Movie {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "director_id")
+    private Director director;
+
+    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY, cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Actor> actors;
 
     public Movie(String name, int productionYear){
         this.name = name;
